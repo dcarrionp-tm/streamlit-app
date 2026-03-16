@@ -20,12 +20,19 @@ Upload an image to get a prediction from your Teachable Machine model.
 """)
 
 @st.cache_resource
+@st.cache_resource
 def get_model():
     try:
-        # Load the model using the legacy loader
-        model = load_model("keras_model.h5", compile=False)
+        # Get the directory where myApp.py is actually located
+        base_path = os.path.dirname(__file__)
+        model_path = os.path.join(base_path, "keras_model.h5")
+        labels_path = os.path.join(base_path, "labels.txt")
+
+        # Load the model using the calculated path
+        model = load_model(model_path, compile=False)
+
         # Load the labels
-        with open("labels.txt", "r") as f:
+        with open(labels_path, "r") as f:
             class_names = f.readlines()
         return model, class_names
     except Exception as e:
