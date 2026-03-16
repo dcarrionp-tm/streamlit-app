@@ -23,9 +23,9 @@ Upload an image to get a prediction from your Teachable Machine model.
 def get_model():
     try:
         # Load the model using the legacy loader
-        model = load_model("/keras_Model.h5", compile=False)
+        model = load_model("keras_Model.h5", compile=False)
         # Load the labels
-        with open("/labels.txt", "r") as f:
+        with open("labels.txt", "r") as f:
             class_names = f.readlines()
         return model, class_names
     except Exception as e:
